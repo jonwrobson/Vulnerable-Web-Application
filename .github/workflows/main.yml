@@ -25,14 +25,15 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: code
-      - name: SonarQube Scanner
+      - name: SonarQube Actions
         # You may pin to the exact commit or the version.
-        # uses: ItsEcholot/sonarqube-action@8d64a899ea2c845dacb34f152a59ea9e557f6125
-        uses: ItsEcholot/sonarqube-action@v0.0.2
+        # uses: achilleslinux/sonarqube-actions@7cfc2572aba766b0ebebaba974e82065863ab20c
+        uses: achilleslinux/sonarqube-actions@achilleslinux
         with:
-          projectKey: example-project
           # SonarQube server URL
           host: https://sonarqube-wzuy2aqse2xvs.azurewebsites.net
+          # The project's unique key. Allowed characters are: letters, numbers, -, _, . and :, with at least one non-digit.
+          projectKey: example-project
           # Set the sonar.projectBaseDir analysis property
           projectBaseDir: code
           # Login or authentication token of a SonarQube user
