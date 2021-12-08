@@ -33,6 +33,6 @@ jobs:
           # SonarQube server URL
           host: https://sonarqube-wzuy2aqse2xvs.azurewebsites.net
           # Set the sonar.projectBaseDir analysis property
-          projectBaseDir: .
+          projectBaseDir: $GITHUB_WORKSPACE
           # Login or authentication token of a SonarQube user
           login: ${{ secrets.SONAR_TOKEN }}
