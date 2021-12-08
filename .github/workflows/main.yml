@@ -21,10 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      
+    steps:      
       - name: SonarQube Scanner
         # You may pin to the exact commit or the version.
         # uses: ItsEcholot/sonarqube-action@8d64a899ea2c845dacb34f152a59ea9e557f6125
@@ -33,6 +30,6 @@ jobs:
           # SonarQube server URL
           host: https://sonarqube-wzuy2aqse2xvs.azurewebsites.net
           # Set the sonar.projectBaseDir analysis property
-          projectBaseDir: $GITHUB_WORKSPACE
+          projectBaseDir: .
           # Login or authentication token of a SonarQube user
           login: ${{ secrets.SONAR_TOKEN }}
