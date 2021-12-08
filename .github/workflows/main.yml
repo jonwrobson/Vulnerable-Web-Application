@@ -16,12 +16,15 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  scan:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:      
+    steps:    
+      - uses: actions/checkout@v2
+        with:
+          path: code
       - name: SonarQube Scanner
         # You may pin to the exact commit or the version.
         # uses: ItsEcholot/sonarqube-action@8d64a899ea2c845dacb34f152a59ea9e557f6125
@@ -30,6 +33,6 @@ jobs:
           # SonarQube server URL
           host: https://sonarqube-wzuy2aqse2xvs.azurewebsites.net
           # Set the sonar.projectBaseDir analysis property
-          projectBaseDir: .
+          projectBaseDir: code
           # Login or authentication token of a SonarQube user
           login: ${{ secrets.SONAR_TOKEN }}
