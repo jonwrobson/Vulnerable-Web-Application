@@ -1,40 +1,23 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: Scan
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches:
+      - master # or the name of your main branch
 jobs:
-  # This workflow contains a single job called "build"
-  scan:
-    # The type of runner that the job will run on
+  build:
+    name: Scan
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:    
+    steps:
       - uses: actions/checkout@v2
         with:
-          path: code
-      - name: SonarQube Actions
-        # You may pin to the exact commit or the version.
-        # uses: achilleslinux/sonarqube-actions@7cfc2572aba766b0ebebaba974e82065863ab20c
-        uses: achilleslinux/sonarqube-actions@achilleslinux
-        with:
-          # SonarQube server URL
-          host: ${{ secrets.SONAR_HOST_URL }}
-          # The project's unique key. Allowed characters are: letters, numbers, -, _, . and :, with at least one non-digit.
-          projectKey: example-project
-          # Set the sonar.projectBaseDir analysis property
-          projectBaseDir: code
-          # Login or authentication token of a SonarQube user
-          login: ${{ secrets.SONAR_TOKEN }}
+          fetch-depth: 0
+      - uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+      # - uses: sonarsource/sonarqube-quality-gate-action@master
+      #   timeout-minutes: 5
+      #   env:
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
