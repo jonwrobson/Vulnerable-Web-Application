@@ -31,7 +31,7 @@ jobs:
         uses: achilleslinux/sonarqube-actions@achilleslinux
         with:
           # SonarQube server URL
-          host: https://sonarqube-wzuy2aqse2xvs.azurewebsites.net
+          host: ${{ secrets.SONAR_HOST_URL }}
           # The project's unique key. Allowed characters are: letters, numbers, -, _, . and :, with at least one non-digit.
           projectKey: example-project
           # Set the sonar.projectBaseDir analysis property
